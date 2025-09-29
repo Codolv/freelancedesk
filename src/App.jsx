@@ -1,29 +1,38 @@
-import { useState } from 'react'
-import { supabase } from './lib/supabase'
+import { useState, useEffect } from "react"
+import { supabase } from "./lib/supabase"
+import ProjectForm from "./components/ProjectForm"
+import ProjectList from "./components/ProjectList"
 
 function App() {
   const [session, setSession] = useState(null)
 
-  supabase.auth.getSession().then(({ data: { session } }) => {
-    setSession(session)
-  })
-
-  supabase.auth.onAuthStateChange((_event, session) => {
-    setSession(session)
-  })
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
 
   if (!session) {
     return <Auth />
-  } else {
-    return <Dashboard />
   }
+
+  return (
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4">FreelanceDesk Dashboard</h1>
+      <ProjectForm onProjectCreated={() => window.location.reload()} />
+      <ProjectList />
+    </div>
+  )
 }
 
 function Auth() {
   async function signIn() {
     await supabase.auth.signInWithPassword({
-      email: 'demo@freelancer.com',
-      password: 'password123',
+      email: "demo@freelancer.com",
+      password: "password123",
     })
   }
 
@@ -35,15 +44,6 @@ function Auth() {
       >
         Demo Login
       </button>
-    </div>
-  )
-}
-
-function Dashboard() {
-  return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold">FreelanceDesk Dashboard</h1>
-      <p>Willkommen!</p>
     </div>
   )
 }
