@@ -120,7 +120,7 @@ export default function ProjectInvoices({ projectId }) {
               value={item.unit_price}
               onChange={(e) => handleItemChange(idx, "unit_price", Number(e.target.value))}
               className="w-24 border px-2 py-1 rounded"
-            />
+            />€
           </div>
         ))}
         <button
@@ -154,13 +154,13 @@ export default function ProjectInvoices({ projectId }) {
                 </span>
               </div>
               <p className="text-sm text-gray-600">
-                Gesamt: {inv.total} {inv.currency}
+                Gesamt: {inv.total}€
               </p>
               <ul className="mt-2 space-y-1 text-sm">
                 {inv.invoice_items.map((item) => (
                   <li key={item.id} className="flex justify-between">
                     <span>
-                      {item.description} ({item.quantity} × {item.unit_price})
+                      {item.description} ({item.quantity} × {item.unit_price}€)
                     </span>
                     <span>{item.subtotal}</span>
                   </li>

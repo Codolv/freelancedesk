@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "../lib/supabase"
 import ProjectUpdates from "./ProjectUpdates"
 import ProjectInvoices from "./ProjectInvoices"
+import ProjectFiles from "./ProjectFiles"
 
 
 export default function ProjectDetail() {
@@ -67,7 +68,7 @@ export default function ProjectDetail() {
 
       {/* Inhalte */}
       {tab === "invoices" && <ProjectInvoices projectId={project.id} />}
-      {tab === "files" && <p>Hier kommen Dateien...</p>}
+      {tab === "files" && <ProjectFiles projectId={project.id} />}
       {tab === "updates" && <ProjectUpdates projectId={project.id} />}
     </div>
   )

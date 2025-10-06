@@ -2,11 +2,16 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import App from "./App"
+import LandingPage from "./components/LandingPage"
 import ProjectDetail from "./components/ProjectDetail"
+import SignIn from "./components/SignIn"
+import Dashboard from "./components/Dashboard"
 import "./index.css"
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
+  { path: "/", element: <LandingPage /> },
+  { path: "/signin", element: <SignIn /> },
+  { path: "/prijects", element: <Dashboard /> },
   { path: "/projects/:id", element: <ProjectDetail /> },
 ])
 

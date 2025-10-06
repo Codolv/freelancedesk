@@ -18,7 +18,7 @@ export default function ProjectUpdates({ projectId }) {
   //load draft
   useEffect(() => {
     const savedDraft = localStorage.getItem(draftKey);
-    if(savedDraft) setNewUpdate(savedDraft);
+    if (savedDraft) setNewUpdate(savedDraft);
   }, [draftKey]);
 
   //save draft
@@ -74,8 +74,8 @@ export default function ProjectUpdates({ projectId }) {
           onChange={(e) => setNewUpdate(e.target.value)}
           className="w-full h-32 p-2 border rounded"
         />
-	<div className="flex justify-between items-center mb-2">
-	<div className="space-x-3">
+        <div className="flex justify-between items-center mb-2">
+          <div className="space-x-3">
             <button
               type="button"
               onClick={() => setShowHelp(!showHelp)}
@@ -91,36 +91,36 @@ export default function ProjectUpdates({ projectId }) {
               {showPreview ? "Preview ausblenden" : "Preview anzeigen"}
             </button>
           </div>
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Posten
-        </button>
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Posten
+          </button>
         </div>
       </form>
-	{showHelp && (
-          <div className="text-xs bg-gray-50 border rounded p-3 space-y-1">
-            <p><b>Markdown Quick-Guide:</b></p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><code>**fett**</code> → <b>fett</b></li>
-              <li><code>*kursiv*</code> → <i>kursiv</i></li>
-              <li><code>- Liste</code> → Aufzählung</li>
-              <li><code>[Link](https://example.com)</code> → <a href="https://example.com">Link</a></li>
-              <li><code>`Code`</code> → <code>Code</code></li>
-              <li><code>```js … ```</code> → Codeblock</li>
-              <li><code>| A | B |</code> Tabellen mit Pipes</li>
-            </ul>
-          </div>
-        )}
-        {showPreview && (
-          <div className="border rounded p-3 bg-white prose prose-sm">
-            <p className="text-xs text-gray-500 mb-2">Vorschau:</p>
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {newUpdate || "*Noch kein Inhalt*"}
-            </ReactMarkdown>
-          </div>
-        )}
+      {showHelp && (
+        <div className="text-xs bg-gray-50 border rounded p-3 space-y-1">
+          <p><b>Markdown Quick-Guide:</b></p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><code>**fett**</code> → <b>fett</b></li>
+            <li><code>*kursiv*</code> → <i>kursiv</i></li>
+            <li><code>- Liste</code> → Aufzählung</li>
+            <li><code>[Link](https://example.com)</code> → <a href="https://example.com">Link</a></li>
+            <li><code>`Code`</code> → <code>Code</code></li>
+            <li><code>```js … ```</code> → Codeblock</li>
+            <li><code>| A | B |</code> Tabellen mit Pipes</li>
+          </ul>
+        </div>
+      )}
+      {showPreview && (
+        <div className="border rounded p-3 bg-white prose prose-sm">
+          <p className="text-xs text-gray-500 mb-2">Vorschau:</p>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {newUpdate || "*Noch kein Inhalt*"}
+          </ReactMarkdown>
+        </div>
+      )}
 
       {loading ? (
         <p>Lade Updates...</p>

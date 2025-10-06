@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { supabase } from "./lib/supabase"
-import ProjectForm from "./components/ProjectForm"
-import ProjectList from "./components/ProjectList"
+import Dashboard from "./components/Dashboard"
+import SignIn from "./components/SignIn"
+import LandingPage from "./components/LandingPage"
 
 function App() {
   const [session, setSession] = useState(null)
@@ -15,35 +17,17 @@ function App() {
     })
   }, [])
 
-  if (!session) {
-    return <Auth />
+  if (session) {
+    return <Dashboard />
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">FreelanceDesk Dashboard</h1>
-      <ProjectForm onProjectCreated={() => window.location.reload()} />
-      <ProjectList />
-    </div>
-  )
-}
-
-function Auth() {
-  async function signIn() {
-    await supabase.auth.signInWithPassword({
-      email: "demo@freelancer.com",
-      password: "password123",
-    })
-  }
-
-  return (
-    <div className="flex h-screen items-center justify-center">
-      <button
-        onClick={signIn}
-        className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-      >
-        Demo Login
-      </button>
+    <div>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/projects" element={<Dashboard />} />
+      </Routes>
     </div>
   )
 }
